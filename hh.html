@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aide Moubarak</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f5132,#14532d,#1b4332);
+    overflow:hidden;
+}
+
+/* Decorations */
+
+.moon{
+    position:absolute;
+    top:40px;
+    right:60px;
+    font-size:80px;
+    animation:float 3s infinite;
+}
+
+.star{
+    position:absolute;
+    color:#ffd700;
+    animation:flash 2s infinite;
+}
+
+.star1{
+    top:120px;
+    left:100px;
+    font-size:30px;
+}
+
+.star2{
+    bottom:150px;
+    right:120px;
+    font-size:25px;
+}
+
+.lantern{
+    position:absolute;
+    left:50px;
+    top:60px;
+    font-size:70px;
+    animation:float 2s infinite;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+@keyframes flash{
+
+    0%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:0.4;
+    }
+
+    100%{
+        opacity:1;
+    }
+
+}
+
+/* Card */
+
+.card{
+
+    width:350px;
+    padding:30px;
+
+    border-radius:25px;
+
+    background:rgba(255,255,255,0.1);
+
+    backdrop-filter:blur(10px);
+
+    border:2px solid #ffd700;
+
+    box-shadow:0 0 30px #ffd700;
+
+    text-align:center;
+
+    color:white;
+
+}
+
+h1{
+    color:#ffd700;
+    margin-bottom:15px;
+    text-shadow:0 0 10px #ffd700;
+}
+
+p{
+    margin-bottom:20px;
+}
+
+input{
+
+    width:100%;
+    padding:14px;
+
+    border:none;
+    border-radius:12px;
+
+    outline:none;
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+    font-size:16px;
+
+}
+
+button{
+
+    padding:12px 30px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#ffd700;
+
+    color:#14532d;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+button:hover{
+
+    transform:scale(1.1);
+
+}
+
+/* Welcome */
+
+.welcome-screen{
+
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
+
+    background:black;
+
+}
+
+#welcomeText{
+
+    color:#ffd700;
+
+    font-size:60px;
+
+    text-shadow:0 0 20px #ffd700;
+
+    animation:zoom 2s infinite alternate;
+
+    text-align:center;
+
+    padding:20px;
+
+}
+
+@keyframes zoom{
+
+    from{
+
+        transform:scale(1);
+
+        opacity:0.5;
+
+    }
+
+    to{
+
+        transform:scale(1.1);
+
+        opacity:1;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="moon">🌙</div>
+
+<div class="star star1">✨</div>
+
+<div class="star star2">⭐</div>
+
+<div class="lantern">🏮</div>
+
+<div class="card">
+
+<h1>Aide Moubarak</h1>
+
+<p>Entrez votre nom pour continuer ✨</p>
+
+<input type="text" id="nomClient" placeholder="Votre nom">
+
+<button onclick="ouvrirSite()">Entrer</button>
+
+</div>
+
+<script>
+
+function ouvrirSite(){
+
+    let nom = document.getElementById("nomClient").value;
+
+    if(nom == ""){
+        nom = "Invité";
+    }
+
+    document.body.innerHTML = `
+
+    <div class="welcome-screen">
+
+        <h1 id="welcomeText"></h1>
+
+    </div>
+
+    <style>
+
+    body{
+        margin:0;
+        overflow:hidden;
+        background:black;
+        font-family:Arial;
+    }
+
+    .welcome-screen{
+
+        height:100vh;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+    }
+
+    #welcomeText{
+
+        color:#ffd700;
+
+        font-size:60px;
+
+        text-shadow:0 0 25px #ffd700;
+
+        animation:zoom 2s infinite alternate;
+
+    }
+
+    @keyframes zoom{
+
+        from{
+            transform:scale(1);
+            opacity:0.5;
+        }
+
+        to{
+            transform:scale(1.15);
+            opacity:1;
+        }
+
+    }
+
+    </style>
+
+    `;
+
+    let texte = "✨ Aide Moubarak " + nom + " ✨";
+
+    let i = 0;
+
+    let speed = setInterval(()=>{
+
+        document.getElementById("welcomeText").innerHTML += texte[i];
+
+        i++;
+
+        if(i >= texte.length){
+
+            clearInterval(speed);
+
+        }
+
+    },100);
+
+}
+
+</script>
+
+</body>
+
+</html>
